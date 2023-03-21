@@ -1,6 +1,7 @@
 package database
 
 import (
+	"baileys/configuration"
 	"database/sql"
 	"fmt"
 	"gorm.io/driver/postgres"
@@ -21,14 +22,21 @@ type Config struct {
 	MaxOpenConnections int
 }
 
-const DsnStringFormat = "postgres://%s:%s@%s:%s/%s?sslmode=disabled&TimeZone=Asia/Kolkata"
+const (
+	DsnStringFormat           = "postgres://%s:%s@%s:%s/%s?sslmode=disabled&TimeZone=Asia/Kolkata"
+	ConfigKeyDatabasePort     = "database.port"
+	ConfigKeyDatabaseHost     = "database.host"
+	ConfigKeyDatabaseUserName = "database.username"
+	ConfigKeyDatabasePassword = "database.password"
+	ConfigKeyDatabaseName     = "database.name"
+)
 
-func (c *Config) buildDSN() string {
+func (c Config) buildDSN() string {
 	return fmt.Sprintf(DsnStringFormat, c.Username, c.Password, c.Host, c.Port, c.DbName)
 }
 
-// InitDatabase initializes postgres connection with provided configuration.
-func InitDatabase(config *Config) {
+// InitDatabaseWithConfig initializes postgres connection with provided configuration.
+func InitDatabaseWithConfig(config Config) {
 	db, err := gorm.Open(postgres.Open(config.DSN), &gorm.Config{
 		Logger: logger.Default,
 	})
@@ -49,6 +57,18 @@ func InitDatabase(config *Config) {
 
 	SetMaxIdleConnections(sqlDB, config.MaxIdleConnections)
 	SetMaxOpenConnections(sqlDB, config.MaxOpenConnections)
+}
+
+// InitDatabase initializes postgres connection with default yaml configuration keys.
+func InitDatabase() {
+	config := Config{
+		Host:     configuration.GetStringConfig(ConfigKeyDatabaseHost),
+		Port:     configuration.GetStringConfig(ConfigKeyDatabasePort),
+		Username: configuration.GetStringConfig(ConfigKeyDatabaseUserName),
+		Password: configuration.GetStringConfig(ConfigKeyDatabasePassword),
+		DbName:   configuration.GetStringConfig(ConfigKeyDatabaseName),
+	}
+	InitDatabaseWithConfig(config)
 }
 
 func SetMaxIdleConnections(sqlDB *sql.DB, connections int) {
