@@ -1,7 +1,7 @@
 package util
 
 import (
-	"baileys/model"
+	"github.com/Anupam-dagar/baileys/model"
 	"github.com/gin-gonic/gin"
 	"github.com/labstack/gommon/log"
 )

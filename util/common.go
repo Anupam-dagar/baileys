@@ -1,7 +1,7 @@
 package util
 
 import (
-	"baileys/constant"
+	"github.com/Anupam-dagar/baileys/constant"
 	"time"
 )
 

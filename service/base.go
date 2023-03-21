@@ -1,10 +1,10 @@
 package service
 
 import (
-	"baileys/interfaces"
-	"baileys/repository"
 	"context"
 	"fmt"
+	"github.com/Anupam-dagar/baileys/interfaces"
+	"github.com/Anupam-dagar/baileys/repository"
 	"github.com/google/uuid"
 )
 

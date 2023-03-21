@@ -1,4 +1,4 @@
-module baileys
+module github.com/Anupam-dagar/baileys
 
 go 1.20
 

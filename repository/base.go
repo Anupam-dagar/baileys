@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"baileys/interfaces"
-	"baileys/util"
-	"baileys/util/database"
 	"context"
+	"github.com/Anupam-dagar/baileys/interfaces"
+	"github.com/Anupam-dagar/baileys/util"
+	"github.com/Anupam-dagar/baileys/util/database"
 	"gorm.io/gorm"
 )
 

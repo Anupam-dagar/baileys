@@ -1,8 +1,8 @@
 package database
 
 import (
-	"baileys/constant"
 	"fmt"
+	"github.com/Anupam-dagar/baileys/constant"
 	"gorm.io/gorm"
 )
 

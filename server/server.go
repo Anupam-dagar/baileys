@@ -1,10 +1,10 @@
 package server
 
 import (
-	"baileys/configuration"
-	"baileys/util/database"
 	"context"
 	"fmt"
+	"github.com/Anupam-dagar/baileys/configuration"
+	"github.com/Anupam-dagar/baileys/util/database"
 	"github.com/gin-gonic/gin"
 	"github.com/labstack/gommon/log"
 	"net/http"

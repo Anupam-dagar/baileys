@@ -1,9 +1,9 @@
 package database
 
 import (
-	"baileys/configuration"
 	"database/sql"
 	"fmt"
+	"github.com/Anupam-dagar/baileys/configuration"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -17,13 +17,12 @@ type Config struct {
 	Username           string
 	Password           string
 	DbName             string
-	DSN                string
 	MaxIdleConnections int
 	MaxOpenConnections int
 }
 
 const (
-	DsnStringFormat           = "postgres://%s:%s@%s:%s/%s?sslmode=disabled&TimeZone=Asia/Kolkata"
+	DsnStringFormat           = "postgres://%s:%s@%s:%s/%s?sslmode=disable&TimeZone=Asia/Kolkata"
 	ConfigKeyDatabasePort     = "database.port"
 	ConfigKeyDatabaseHost     = "database.host"
 	ConfigKeyDatabaseUserName = "database.username"
@@ -37,7 +36,7 @@ func (c Config) buildDSN() string {
 
 // InitDatabaseWithConfig initializes postgres connection with provided configuration.
 func InitDatabaseWithConfig(config Config) {
-	db, err := gorm.Open(postgres.Open(config.DSN), &gorm.Config{
+	db, err := gorm.Open(postgres.Open(config.buildDSN()), &gorm.Config{
 		Logger: logger.Default,
 	})
 

@@ -1,9 +1,9 @@
 package util
 
 import (
-	"baileys/constant"
-	"baileys/util/database"
 	"context"
+	"github.com/Anupam-dagar/baileys/constant"
+	"github.com/Anupam-dagar/baileys/util/database"
 	"gorm.io/gorm"
 )
 

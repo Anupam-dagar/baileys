@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"baileys/interfaces"
-	"baileys/service"
-	"baileys/util"
+	"github.com/Anupam-dagar/baileys/interfaces"
+	"github.com/Anupam-dagar/baileys/service"
+	"github.com/Anupam-dagar/baileys/util"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
