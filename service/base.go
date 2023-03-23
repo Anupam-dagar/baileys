@@ -13,7 +13,7 @@ type BaseServiceInterface[T interfaces.Entity] interface {
 	Create(ctx context.Context, payload T) (T, error)
 	Update(ctx context.Context, id string, payload T) (T, error)
 	Delete(ctx context.Context, id string) error
-	Get(ctx context.Context, payload T) ([]T, error)
+	Search(ctx context.Context) ([]T, error)
 }
 
 type baseService[T interfaces.Entity] struct {
@@ -55,11 +55,6 @@ func (bc *baseService[T]) Delete(ctx context.Context, id string) (err error) {
 	return err
 }
 
-func (bc *baseService[T]) Get(ctx context.Context, payload T) (res []T, err error) {
-	fieldMap, err := payload.GetStructData()
-	if err != nil {
-		return res, err
-	}
-
-	return bc.baseRepository.Get(ctx, fieldMap)
+func (bc *baseService[T]) Search(ctx context.Context) (res []T, err error) {
+	return bc.baseRepository.Search(ctx)
 }

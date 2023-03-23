@@ -13,7 +13,7 @@ type BaseRepository[T interfaces.Entity] interface {
 	Create(ctx context.Context, entity *T) error
 	Update(ctx context.Context, id string, entity *T) error
 	Delete(ctx context.Context, id string) error
-	Get(ctx context.Context, fields map[string]interface{}) ([]T, error)
+	Search(ctx context.Context) ([]T, error)
 }
 
 type baseRepository[T interfaces.Entity] struct {
@@ -57,10 +57,10 @@ func (br *baseRepository[T]) Delete(ctx context.Context, id string) (err error) 
 	return util.SoftDeleteById(ctx, txn, id)
 }
 
-func (br *baseRepository[T]) Get(ctx context.Context, fields map[string]interface{}) (data []T, err error) {
+func (br *baseRepository[T]) Search(ctx context.Context) (data []T, err error) {
 	txn := br.db.Debug().WithContext(ctx).Model(br.repoModel)
 
-	err = txn.Where(fields).Find(&data).Error
+	err = txn.Find(&data).Error
 
 	return data, err
 }
