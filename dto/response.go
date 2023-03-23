@@ -1,4 +1,4 @@
-package model
+package dto
 
 type Status struct {
 	Code       int    `json:"code"`
