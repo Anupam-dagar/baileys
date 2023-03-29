@@ -13,19 +13,51 @@ import (
 	"time"
 )
 
-func RunServer(
-	ginEngine *gin.Engine,
-) {
+type ginEngine struct {
+	engine *gin.Engine
+}
+
+type GinEngineInterface interface {
+	InitGinApp(setupRoutes func()) GinEngineInterface
+	RunServer()
+	GetRootRouterGroup() *gin.RouterGroup
+}
+
+func NewGinEngine() GinEngineInterface {
+	ge := new(ginEngine)
+	ge.engine = gin.Default()
+
+	return ge
+}
+
+func (ge *ginEngine) InitGinApp(setupRoutes func()) GinEngineInterface {
+	configuration.Init()
 	database.InitDatabase()
 
+	setupRoutes()
+
+	return ge
+}
+
+func (ge *ginEngine) GetRootRouterGroup() *gin.RouterGroup {
+	return ge.engine.Group(configuration.GetStringConfig("server.base_api_path"))
+}
+
+func (ge *ginEngine) RunServer() {
 	// Create context that listens for the interrupt signal from the OS.
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
+	ginRoutes := GetRoutes()
+	for _, route := range ginRoutes {
+		routerGroup, routeFunc := route()
+		routeFunc(routerGroup)
+	}
+
 	port := configuration.GetStringConfig("server.port")
 	srv := &http.Server{
 		Addr:    fmt.Sprintf(":%s", port),
-		Handler: ginEngine,
+		Handler: ge.engine,
 	}
 
 	// Initializing the server in a goroutine so that

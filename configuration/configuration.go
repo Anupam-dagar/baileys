@@ -4,7 +4,7 @@ import "github.com/spf13/viper"
 
 var configuration *viper.Viper
 
-func Init(config interface{}) {
+func Init() {
 	viper.AutomaticEnv()
 
 	if viper.Get("ENV") == nil {
@@ -20,11 +20,6 @@ func Init(config interface{}) {
 		panic(err)
 	}
 
-	err = viper.Unmarshal(&config)
-	if err != nil {
-		panic(err)
-	}
-
 	configuration = viper.GetViper()
 }
 
@@ -34,4 +29,16 @@ func GetConfiguration() *viper.Viper {
 
 func GetStringConfig(key string) string {
 	return configuration.GetString(key)
+}
+
+func GetIntConfig(key string) int {
+	return configuration.GetInt(key)
+}
+
+func GetBoolConfig(key string) bool {
+	return configuration.GetBool(key)
+}
+
+func GetConfig(key string) any {
+	return configuration.Get(key)
 }
