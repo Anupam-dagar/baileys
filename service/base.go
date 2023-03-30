@@ -2,10 +2,9 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"github.com/Anupam-dagar/baileys/interfaces"
 	"github.com/Anupam-dagar/baileys/repository"
-	"github.com/google/uuid"
+	"github.com/Anupam-dagar/baileys/util/search"
 )
 
 type BaseServiceInterface[T interfaces.Entity] interface {
@@ -13,7 +12,7 @@ type BaseServiceInterface[T interfaces.Entity] interface {
 	Create(ctx context.Context, payload T) (T, error)
 	Update(ctx context.Context, id string, payload T) (T, error)
 	Delete(ctx context.Context, id string) error
-	Search(ctx context.Context) ([]T, error)
+	Search(ctx context.Context, filters string, includes string, page int, pageSize int, sortParams string) (res []T, totalCount int, err error)
 }
 
 type baseService[T interfaces.Entity] struct {
@@ -32,15 +31,8 @@ func (bc *baseService[T]) GetById(ctx context.Context, id string) (res T, err er
 }
 
 func (bc *baseService[T]) Create(ctx context.Context, payload T) (res T, err error) {
-	err = payload.SetCol("Id", uuid.NewString())
-	if err != nil {
-		fmt.Println(err)
-		return res, err
-	}
-
 	err = bc.baseRepository.Create(ctx, &payload)
-
-	return res, err
+	return payload, err
 }
 
 func (bc *baseService[T]) Update(ctx context.Context, id string, payload T) (res T, err error) {
@@ -55,6 +47,10 @@ func (bc *baseService[T]) Delete(ctx context.Context, id string) (err error) {
 	return err
 }
 
-func (bc *baseService[T]) Search(ctx context.Context) (res []T, err error) {
-	return bc.baseRepository.Search(ctx)
+func (bc *baseService[T]) Search(ctx context.Context, filters string, includes string, page int, pageSize int, sortParams string) (res []T, totalCount int, err error) {
+	filterMap, err := search.ParseFilters(filters)
+	if err != nil {
+		return nil, 0, err
+	}
+	return bc.baseRepository.Search(ctx, filterMap, includes, page, pageSize, sortParams)
 }

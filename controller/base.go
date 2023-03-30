@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"github.com/Anupam-dagar/baileys/dto"
 	"github.com/Anupam-dagar/baileys/interfaces"
 	"github.com/Anupam-dagar/baileys/service"
 	"github.com/Anupam-dagar/baileys/util/response"
@@ -23,7 +24,7 @@ type baseController[T interfaces.Entity] struct {
 func NewBaseController[T interfaces.Entity](rg *gin.RouterGroup) BaseControllerInterface {
 	bc := new(baseController[T])
 	bc.baseService = service.NewBaseService[T]()
-	rg.GET("", bc.Search)
+	rg.POST("/search", bc.Search)
 	rg.GET("/:id", bc.GetById)
 	rg.POST("", bc.Create)
 	rg.PUT("/:id", bc.Update)
@@ -99,19 +100,17 @@ func (bc *baseController[T]) Delete(ctx *gin.Context) {
 }
 
 func (bc *baseController[T]) Search(ctx *gin.Context) {
-	var payload T
-	if err := ctx.ShouldBindQuery(&payload); err != nil {
+	var searchEntry dto.SearchEntry
+	if err := ctx.ShouldBindJSON(&searchEntry); err != nil {
 		response.ErrorResponse(ctx, http.StatusBadRequest, err)
-
 		return
 	}
 
-	data, err := bc.baseService.Search(ctx)
+	data, totalCount, err := bc.baseService.Search(ctx, searchEntry.Filters, searchEntry.Includes, searchEntry.Page, searchEntry.PageSize, searchEntry.Sort)
 	if err != nil {
 		response.ErrorResponse(ctx, http.StatusInternalServerError, err)
-
 		return
 	}
 
-	response.SuccessResponse(ctx, http.StatusOK, "Successfully searched", data)
+	response.SuccessResponseWithCount(ctx, http.StatusOK, "Successfully searched", totalCount, data)
 }

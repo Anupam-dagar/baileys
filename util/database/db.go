@@ -36,7 +36,9 @@ func (c Config) buildDSN() string {
 
 // InitDatabaseWithConfig initializes postgres connection with provided configuration.
 func InitDatabaseWithConfig(config Config) {
-	db, err := gorm.Open(postgres.Open(config.buildDSN()), &gorm.Config{
+	var err error
+	fmt.Println(config.buildDSN())
+	db, err = gorm.Open(postgres.Open(config.buildDSN()), &gorm.Config{
 		Logger: logger.Default,
 	})
 
@@ -53,7 +55,7 @@ func InitDatabaseWithConfig(config Config) {
 	if err != nil {
 		panic(fmt.Sprintf("Ping failed : unable to establish connection with database: %s ", err.Error()))
 	}
-
+	fmt.Println(db)
 	SetMaxIdleConnections(sqlDB, config.MaxIdleConnections)
 	SetMaxOpenConnections(sqlDB, config.MaxOpenConnections)
 }
@@ -106,5 +108,15 @@ func DisconnectDatabase() {
 
 // GetDatabase returns the database instance
 func GetDatabase() *gorm.DB {
+	fmt.Println(db)
 	return db
+}
+
+func GetTableName(db *gorm.DB, entityStruct interface{}) (string, error) {
+	stmt := &gorm.Statement{DB: db}
+	err := stmt.Parse(entityStruct)
+	if err != nil {
+		return "", err
+	}
+	return stmt.Schema.Table, nil
 }
