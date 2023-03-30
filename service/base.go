@@ -40,7 +40,7 @@ func (bc *baseService[T]) Create(ctx context.Context, payload T) (res T, err err
 
 	err = bc.baseRepository.Create(ctx, &payload)
 
-	return res, err
+	return payload, err
 }
 
 func (bc *baseService[T]) Update(ctx context.Context, id string, payload T) (res T, err error) {
@@ -50,9 +50,7 @@ func (bc *baseService[T]) Update(ctx context.Context, id string, payload T) (res
 }
 
 func (bc *baseService[T]) Delete(ctx context.Context, id string) (err error) {
-	err = bc.baseRepository.Delete(ctx, id)
-
-	return err
+	return bc.baseRepository.Delete(ctx, id)
 }
 
 func (bc *baseService[T]) Search(ctx context.Context) (res []T, err error) {
