@@ -1,6 +1,7 @@
 package util
 
 import (
+	"errors"
 	"github.com/Anupam-dagar/baileys/constant"
 	"reflect"
 	"strings"
@@ -19,10 +20,10 @@ func SplitStringFromBack(str, delimiter string) (string, string) {
 	return str[:lastIndex], str[lastIndex+len(delimiter):]
 }
 
-func ReadTag(modelStruct any, fieldName string, tag string) string {
+func ReadTag(modelStruct any, fieldName string, tag string) (string, error) {
 	field, ok := reflect.TypeOf(modelStruct).Elem().FieldByName(fieldName)
 	if !ok {
-		panic("Field not found")
+		return "", errors.New("field not found")
 	}
-	return field.Tag.Get(tag)
+	return field.Tag.Get(tag), nil
 }
