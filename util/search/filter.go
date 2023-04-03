@@ -133,9 +133,15 @@ func GetWherePredicates(query *gorm.DB, filterMap dto.SearchFilters, repoModel i
 				return nil, err
 			}
 		} else {
-			joinCondition := util.ReadTag(repoModel, tableName, "join")
+			joinCondition, err := util.ReadTag(repoModel, tableName, "join")
+			if err != nil {
+				return nil, err
+			}
 			query = query.Joins(joinCondition)
-			tableName = util.ReadTag(repoModel, tableName, "tableName")
+			tableName, err = util.ReadTag(repoModel, tableName, "tableName")
+			if err != nil {
+				return nil, err
+			}
 		}
 
 		for _, colVal := range tableFilterMap {
