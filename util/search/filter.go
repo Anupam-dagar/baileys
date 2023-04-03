@@ -157,10 +157,11 @@ func GetWherePredicates(query *gorm.DB, filterMap dto.SearchFilters, repoModel i
 }
 
 func AddIncludes(includes string, query *gorm.DB) *gorm.DB {
-	if includes != "" {
-		for _, include := range strings.Split(includes, ",") {
-			query = query.Preload(include)
-		}
+	if includes == "" {
+		return query
+	}
+	for _, include := range strings.Split(includes, ",") {
+		query = query.Preload(include)
 	}
 	return query
 }

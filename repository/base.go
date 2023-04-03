@@ -68,7 +68,6 @@ func (br *baseRepository[T]) Search(ctx context.Context, filterMap dto.SearchFil
 	if err != nil {
 		return nil, 0, err
 	}
-
 	paginationPredicates := search.GetPaginationPredicates(page, pageSize)
 	sortPredicates := search.GetSortPredicates(sortParams)
 
