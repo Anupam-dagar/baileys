@@ -1,10 +1,13 @@
 package configuration
 
-import "github.com/spf13/viper"
+import (
+	"github.com/Anupam-dagar/baileys/constant/types"
+	"github.com/spf13/viper"
+)
 
 var configuration *viper.Viper
 
-func Init(config interface{}) {
+func Init() {
 	viper.AutomaticEnv()
 
 	if viper.Get("ENV") == nil {
@@ -20,11 +23,6 @@ func Init(config interface{}) {
 		panic(err)
 	}
 
-	err = viper.Unmarshal(&config)
-	if err != nil {
-		panic(err)
-	}
-
 	configuration = viper.GetViper()
 }
 
@@ -32,6 +30,18 @@ func GetConfiguration() *viper.Viper {
 	return configuration
 }
 
-func GetStringConfig(key string) string {
-	return configuration.GetString(key)
+func GetStringConfig(key types.ConfigurationKey) string {
+	return configuration.GetString(string(key))
+}
+
+func GetIntConfig(key types.ConfigurationKey) int {
+	return configuration.GetInt(string(key))
+}
+
+func GetBoolConfig(key types.ConfigurationKey) bool {
+	return configuration.GetBool(string(key))
+}
+
+func GetConfig(key types.ConfigurationKey) any {
+	return configuration.Get(string(key))
 }

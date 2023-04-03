@@ -32,6 +32,7 @@ func (bc *baseService[T]) GetById(ctx context.Context, id string) (res T, err er
 
 func (bc *baseService[T]) Create(ctx context.Context, payload T) (res T, err error) {
 	err = bc.baseRepository.Create(ctx, &payload)
+
 	return payload, err
 }
 
@@ -42,9 +43,7 @@ func (bc *baseService[T]) Update(ctx context.Context, id string, payload T) (res
 }
 
 func (bc *baseService[T]) Delete(ctx context.Context, id string) (err error) {
-	err = bc.baseRepository.Delete(ctx, id)
-
-	return err
+	return bc.baseRepository.Delete(ctx, id)
 }
 
 func (bc *baseService[T]) Search(ctx context.Context, filters string, includes string, page int, pageSize int, sortParams string) (res []T, totalCount int, err error) {

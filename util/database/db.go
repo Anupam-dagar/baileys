@@ -37,7 +37,6 @@ func (c Config) buildDSN() string {
 // InitDatabaseWithConfig initializes postgres connection with provided configuration.
 func InitDatabaseWithConfig(config Config) {
 	var err error
-	fmt.Println(config.buildDSN())
 	db, err = gorm.Open(postgres.Open(config.buildDSN()), &gorm.Config{
 		Logger: logger.Default,
 	})
