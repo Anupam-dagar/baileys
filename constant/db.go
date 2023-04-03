@@ -5,4 +5,5 @@ type QueryOperation string
 const (
 	QueryOr  QueryOperation = "OR"
 	QueryAnd QueryOperation = "AND"
+	QueryNot QueryOperation = "NOT"
 )
