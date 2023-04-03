@@ -2,15 +2,13 @@ package repository
 
 import (
 	"context"
-	"fmt"
-	"github.com/Anupam-dagar/baileys/constant"
+	"github.com/Anupam-dagar/baileys/dto"
 	"github.com/Anupam-dagar/baileys/interfaces"
 	"github.com/Anupam-dagar/baileys/util"
 	"github.com/Anupam-dagar/baileys/util/database"
 	"github.com/Anupam-dagar/baileys/util/database/query_builder"
 	"github.com/Anupam-dagar/baileys/util/search"
 	"gorm.io/gorm"
-	"strings"
 )
 
 type BaseRepository[T interfaces.Entity] interface {
@@ -18,7 +16,7 @@ type BaseRepository[T interfaces.Entity] interface {
 	Create(ctx context.Context, entity *T) error
 	Update(ctx context.Context, id string, entity *T) error
 	Delete(ctx context.Context, id string) error
-	Search(ctx context.Context, filters map[string]map[string]map[string]string, includes string, page int, pageSize int, sortParams string) ([]T, int, error)
+	Search(ctx context.Context, filters dto.SearchFilters, includes string, page int, pageSize int, sortParams string) ([]T, int, error)
 }
 
 type baseRepository[T interfaces.Entity] struct {
@@ -62,65 +60,28 @@ func (br *baseRepository[T]) Delete(ctx context.Context, id string) (err error) 
 	return util.SoftDeleteById(ctx, txn, id)
 }
 
-func (br *baseRepository[T]) Search(ctx context.Context, filterMap map[string]map[string]map[string]string, includes string, page int, pageSize int, sortParams string) (data []T, totalCount int, err error) {
+func (br *baseRepository[T]) Search(ctx context.Context, filterMap dto.SearchFilters, includes string, page int, pageSize int, sortParams string) (data []T, totalCount int, err error) {
 	txn := br.db.Debug().WithContext(ctx).Model(br.repoModel)
 	query := txn.Model(br.repoModel)
 
-	for tableName, tableFilterMap := range filterMap {
-		if tableName == constant.Root {
-			tableName, err = database.GetTableName(br.db, br.repoModel)
-			if err != nil {
-				return nil, 0, err
-			}
-		} else {
-			joinCondition := util.ReadTag(br.repoModel, tableName, "join")
-			query = query.Joins(joinCondition)
-			tableName = util.ReadTag(br.repoModel, tableName, "tableName")
-		}
-
-		for _, colVal := range tableFilterMap {
-			for col, val := range colVal {
-				key := fmt.Sprintf("\"%s\".%s", tableName, col)
-				delete(colVal, col)
-				colVal[key] = val
-			}
-		}
-
-		wherePredicates, err := search.GetWherePredicates(tableFilterMap)
-		if err != nil {
-			return nil, 0, err
-		}
-
-		query = query.Scopes(wherePredicates...)
+	wherePredicates, err := search.GetWherePredicates(query, filterMap, br.repoModel)
+	if err != nil {
+		return nil, 0, err
 	}
 
-	//get total count
+	paginationPredicates := search.GetPaginationPredicates(page, pageSize)
+	sortPredicates := search.GetSortPredicates(sortParams)
+
+	query = search.AddScopes(query, wherePredicates)
 	totalCount, err = util.GetTotalCount(query)
 	if err != nil {
 		return nil, 0, err
 	}
 
-	//add includes
-	if includes != "" {
-		for _, include := range strings.Split(includes, ",") {
-			query = query.Preload(include)
-		}
-	}
+	query = search.AddScopes(query, sortPredicates, paginationPredicates)
+	query = search.AddIncludes(includes, query)
 
-	//add sort
-	if sortParams != "" {
-		sortPredicates := search.GetSortPredicates(sortParams)
-		query = query.Scopes(sortPredicates...)
-	}
+	err = query.Find(&data).Error
 
-	//add pagination
-	paginationPredicates := search.GetPaginationPredicates(page, pageSize)
-	query = query.Scopes(paginationPredicates...)
-
-	//filter rows
-	if err := query.Find(&data).Error; err != nil {
-		return nil, 0, err
-	}
-
-	return data, totalCount, nil
+	return data, totalCount, err
 }

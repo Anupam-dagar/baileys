@@ -95,7 +95,7 @@ func ColumnValNotNull(columnName string) func(db *gorm.DB) *gorm.DB {
 	}
 }
 
-func ColumnOrderBy(columnName string, orderToken constant.SortOrder) func(db *gorm.DB) *gorm.DB {
+func ColumnOrderBy(columnName string, orderToken string) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
 		return db.Order(fmt.Sprintf("%s %s", columnName, orderToken))
 	}
@@ -165,11 +165,11 @@ func BoolColumnValEqual(columnName string, val *bool, operation constant.QueryOp
 
 func Paginate(page int, pageSize int) func(db *gorm.DB) *gorm.DB {
 	return func(db *gorm.DB) *gorm.DB {
-		if pageSize > constant.MaxPageSize {
-			pageSize = constant.DefaultPageSize
+		if pageSize == constant.MinPageSize {
+			return nil
 		}
-		offset := page * pageSize
 
+		offset := page * pageSize
 		return db.Offset(offset).Limit(pageSize)
 	}
 }
