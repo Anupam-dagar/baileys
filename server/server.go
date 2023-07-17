@@ -9,6 +9,7 @@ import (
 	"github.com/labstack/gommon/log"
 	"net/http"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
 )
@@ -23,10 +24,19 @@ type GinEngineInterface interface {
 	GetRootRouterGroup() *gin.RouterGroup
 }
 
-func NewGinEngine() GinEngineInterface {
-	ge := new(ginEngine)
-	ge.engine = gin.Default()
+var ge *ginEngine
+var geOnce sync.Once
 
+func NewGinEngine() GinEngineInterface {
+	geOnce.Do(func() {
+		ge = new(ginEngine)
+		ge.engine = gin.Default()
+	})
+
+	return ge
+}
+
+func GetGinEngine() GinEngineInterface {
 	return ge
 }
 
