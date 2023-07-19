@@ -28,7 +28,21 @@
         crossChapter: true,
         crossChapterText: true,
       },
-      routerMode: 'history'
+      routerMode: 'history',
+      plugins: [
+        function pageFooter(hook, vm) {
+          var footer = [
+            '<hr/>',
+            '<footer>',
+            '<span>&copy;2023 <a href="https://github.com/Anupam-dagar/baileys">Baileys</a>: Simplicity meets scalable excellence!</span>',
+            '</footer>',
+          ].join('');
+
+          hook.afterEach(function (html) {
+            return html + footer;
+          });
+        },
+      ],
     }
   </script>
   <!-- Docsify v4 -->
