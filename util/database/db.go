@@ -54,7 +54,6 @@ func InitDatabaseWithConfig(config Config) {
 	if err != nil {
 		panic(fmt.Sprintf("Ping failed : unable to establish connection with database: %s ", err.Error()))
 	}
-	fmt.Println(db)
 	SetMaxIdleConnections(sqlDB, config.MaxIdleConnections)
 	SetMaxOpenConnections(sqlDB, config.MaxOpenConnections)
 }
@@ -107,7 +106,6 @@ func DisconnectDatabase() {
 
 // GetDatabase returns the database instance
 func GetDatabase() *gorm.DB {
-	fmt.Println(db)
 	return db
 }
 
