@@ -1,4 +1,4 @@
 - [Overview](/)
 - **Getting Started**
-  - [Quick Start](quickstart.md)
-  - [Tutorial - Polls App](tutorial.md)
+  - [Quick Start](/baileys/quickstart.md)
+  - [Tutorial - Polls App](/baileys/tutorial.md)
