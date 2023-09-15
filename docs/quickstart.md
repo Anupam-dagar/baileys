@@ -1,5 +1,7 @@
 # Quick Start
 
+To get an indepth overview of baileys, you can start with the [Polls App Tutorial](tutorial.md).
+
 ## Requirements
 - golang `1.20+`
 
