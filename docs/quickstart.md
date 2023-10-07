@@ -86,8 +86,8 @@ func (u *User) SetCol(field string, val interface{}) error {
 	return reflections.SetField(u, field, val)
 }
 
-func (u *User) GetStructData() (map[string]interface{}, error) {
-	return reflections.Items(u)
+func (u *User) GetModel() interface{} {
+	return &User{}
 }
 
 // Defining routes
