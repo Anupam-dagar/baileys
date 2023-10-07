@@ -1,13 +1,11 @@
 # Polls App
 
-To give a more indepth overview of how baileys work, we will be building a simple polls app which allows users to create
-polls and vote on it and view all the created polls. All the essential components of baileys will be elaborated while
-building the app.
+To provide a more comprehensive understanding of how Baileys works, we will create a simple polls app. This app allows users to create polls, vote on them, and view all created polls. Throughout the development of the app, we will delve into the core components of Baileys.
 
 ## Setup a polls baileys project
 
-1. Create a new directory named `polls`
-2. Init a go module
+1. Begin by creating a new directory named `polls`.
+2. Initialize a Go module:
 
 ```bash
 $ go mod init polls
@@ -21,14 +19,14 @@ $ go get -u github.com/Anupam-dagar/baileys
 
 ## Database Setup
 
-1. Create a new postgres database named `polls`.
+1. Create a new PostgreSQL database named `polls`.
 
 ```sql
 CREATE DATABASE polls;
 ```
 
 2. Create the required tables.
-   - `polls` - Poll created by the user.
+   - `polls` - Stores information about polls created by users.
    ```sql
    CREATE TABLE IF NOT EXISTS polls (
         id varchar(255) NOT NULL PRIMARY KEY,
@@ -41,7 +39,7 @@ CREATE DATABASE polls;
         deleted_by varchar(255) NULL
    );
    ```
-   - `poll_options` - Options for the poll created by the user.
+   - `poll_options` - Contains options for the polls.
    ```sql
    CREATE TABLE IF NOT EXISTS poll_options (
         id varchar(255) NOT NULL PRIMARY KEY,
@@ -56,7 +54,7 @@ CREATE DATABASE polls;
     );
    ```
 
-   - `votes` - Votes received to an option for a poll.
+   - `votes` - Records votes received for poll options.
    ```sql
    CREATE TABLE IF NOT EXISTS votes (
         id varchar(255) NOT NULL PRIMARY KEY,
@@ -73,7 +71,7 @@ CREATE DATABASE polls;
 
 ## Directory Structure
 
-You can use the following commands to setup the directory structure.
+Set up the directory structure with the following commands:
 
 ```bash
 mkdir config
@@ -88,7 +86,7 @@ touch main.go
 
 ## Configuration Setup
 
-Create a `dev.yaml` file under the directory `config` and use the following configuration
+Create a `dev.yaml` file under the `config` directory and use the following configuration:
 
 ```yaml
 server:
@@ -105,7 +103,7 @@ database:
 
 ## Entity Setup
 
-Create the following files under the directory `entity`
+Create the following files under the `entity` directory:
 
 - `poll.go`
    ```go
@@ -352,7 +350,7 @@ Create the following files under the directory `entity`
    ```
 
 ## Setting up the server
-Create `main.go` in the root of the directory which will be used to run the server
+Create a `main.go` file in the root directory to run the server:
 ```go
 package main
 
@@ -371,7 +369,7 @@ Open a terminal at the root of the directory and run the following command
 ```bash
 go run main.go
 ```
-You should see the following output in the terminal if everything went right
+You should see the following output in the terminal if everything is set up correctly
 ```bash
 [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
 
@@ -400,13 +398,13 @@ You should see the following output in the terminal if everything went right
 ## Testing the polls app
 
 ### Creating a poll
-To create a poll, we will be using the `POST` endpoint `/api/polls` with the following request body
+To create a poll, use the `POST` endpoint `/api/polls` with the following request body:
 ```json
 {
   "title": "Which is your favourite programming language"
 }
 ```
-You should see the following response
+You should receive the following response:
 ```json
 {
    "status": {
@@ -427,7 +425,7 @@ You should see the following response
 ```
 
 ### Creating a poll option
-To create a poll option, we will be using the `POST` endpoint `/api/poll-options` with the following request body
+To create a poll option, use the `POST` endpoint `/api/poll-options` with the following request body:
 ```json
 {
   "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
@@ -456,14 +454,14 @@ You should see the following response
 ```
 
 ### Creating a vote for the poll
-To create a vote, we will be using the `POST` endpoint `/api/votes` with the following request body
+To create a vote, use the `POST` endpoint `/api/votes` with the following request body:
 ```json
 {
   "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
   "pollOptionId": "6bde533f-9b10-4ec4-87f8-dcc371b89948"
 }
 ```
-You should see the following response
+You should receive the following response:
 ```json
 {
    "status": {
@@ -485,8 +483,8 @@ You should see the following response
 ```
 
 ### Retrieve a poll by id
-To retrieve a poll by `id`, we will be using the `GET` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`)
-You should see the following response
+To retrieve a poll by `id`, use the `GET` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`)
+You should receive the following response
 ```json
 {
    "status": {
@@ -507,7 +505,7 @@ You should see the following response
 ```
 
 ### Retrieving all the polls
-To retrieve all the polls, we will be using the `POST` endpoint `/api/polls/search` with the following request body
+To retrieve all the polls, use the `POST` endpoint `/api/polls/search` with the following request body
 ```json
 {
   "pagination": {
@@ -516,7 +514,7 @@ To retrieve all the polls, we will be using the `POST` endpoint `/api/polls/sear
   }
 }
 ```
-You should see the following response
+You should receive the following response
 ```json
 {
    "status": {
@@ -541,13 +539,13 @@ You should see the following response
 To know more about search api, refer to [search api](#search-api).
 
 ### Update a poll
-To update a poll, we will be using the `PUT` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`) with the following request body
+To update a poll, use the `PUT` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`) with the following request body
 ```json
 {
   "title": "Which is your favourite programming language?"
 }
 ```
-You should see the following response
+You should receive the following response
 ```json
 {
    "status": {
@@ -568,8 +566,8 @@ You should see the following response
 ```
 
 ### Delete a poll
-To delete a poll, we will be using the `DELETE` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`)
-You should see the following response
+To delete a poll, use the `DELETE` endpoint `/api/polls/:id` where `:id` will be replaced by a poll id (eg: `f65ee8d5-57e8-4c6c-9ade-c65bad04b383`)
+You should receive the following response
 ```json
 {
    "status": {
