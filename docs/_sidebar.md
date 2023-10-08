@@ -8,3 +8,6 @@
   - [Service](service.md)
   - [Repository](repository.md)
   - [Routes](routes.md)
+- **Api Reference**
+  - [Configuration](configuration.md)
+  - [Response](response.md)
