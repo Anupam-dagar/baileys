@@ -407,20 +407,20 @@ To create a poll, use the `POST` endpoint `/api/polls` with the following reques
 You should receive the following response:
 ```json
 {
-   "status": {
-      "code": 200,
-      "message": "Successfully created",
-      "type": "success"
-   },
-   "data": {
-  "id": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
-  "title": "Which is your favourite programming language",
-  "createdAt": "2021-10-01T17:14:21.156256+05:30",
-  "updatedAt": "2021-10-01T17:14:21.156256+05:30",
-  "createdBy": "",
-  "updatedBy": "",
-  "deletedBy": ""
-}
+  "status": {
+    "code": 200,
+    "message": "Successfully created",
+    "type": "success"
+  },
+  "data": {
+    "id": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
+    "title": "Which is your favourite programming language",
+    "createdAt": "2021-10-01T17:14:21.156256+05:30",
+    "updatedAt": "2021-10-01T17:14:21.156256+05:30",
+    "createdBy": "",
+    "updatedBy": "",
+    "deletedBy": ""
+  }
 }
 ```
 
@@ -435,21 +435,21 @@ To create a poll option, use the `POST` endpoint `/api/poll-options` with the fo
 You should see the following response
 ```json
 {
-   "status": {
-      "code": 200,
-      "message": "Successfully created",
-      "type": "success"
-   },
-   "data": {
-  "id": "6bde533f-9b10-4ec4-87f8-dcc371b89948",
-  "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
-  "title": "Go",
-  "createdAt": "2021-10-01T17:14:21.156256+05:30",
-  "updatedAt": "2021-10-01T17:14:21.156256+05:30",
-  "createdBy": "",
-  "updatedBy": "",
-  "deletedBy": ""
-}
+  "status": {
+    "code": 200,
+    "message": "Successfully created",
+    "type": "success"
+  },
+  "data": {
+    "id": "6bde533f-9b10-4ec4-87f8-dcc371b89948",
+    "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
+    "title": "Go",
+    "createdAt": "2021-10-01T17:14:21.156256+05:30",
+    "updatedAt": "2021-10-01T17:14:21.156256+05:30",
+    "createdBy": "",
+    "updatedBy": "",
+    "deletedBy": ""
+  }
 }
 ```
 
@@ -464,21 +464,21 @@ To create a vote, use the `POST` endpoint `/api/votes` with the following reques
 You should receive the following response:
 ```json
 {
-   "status": {
-      "code": 200,
-      "message": "Successfully created",
-      "type": "success"
-   },
-   "data": {
-  "id": "419bdcf4-1236-46f0-864d-bb9291ea5dda",
-  "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
-  "pollOptionId": "6bde533f-9b10-4ec4-87f8-dcc371b89948",
-  "createdAt": "2021-10-01T17:14:21.156256+05:30",
-  "updatedAt": "2021-10-01T17:14:21.156256+05:30",
-  "createdBy": "",
-  "updatedBy": "",
-  "deletedBy": ""
-}
+  "status": {
+    "code": 200,
+    "message": "Successfully created",
+    "type": "success"
+  },
+  "data": {
+    "id": "419bdcf4-1236-46f0-864d-bb9291ea5dda",
+    "pollId": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
+    "pollOptionId": "6bde533f-9b10-4ec4-87f8-dcc371b89948",
+    "createdAt": "2021-10-01T17:14:21.156256+05:30",
+    "updatedAt": "2021-10-01T17:14:21.156256+05:30",
+    "createdBy": "",
+    "updatedBy": "",
+    "deletedBy": ""
+  }
 }
 ```
 
@@ -487,20 +487,20 @@ To retrieve a poll by `id`, use the `GET` endpoint `/api/polls/:id` where `:id` 
 You should receive the following response
 ```json
 {
-   "status": {
-      "code": 200,
-      "message": "Successfully fetched by Id",
-      "type": "success"
-   },
-   "data": {
-  "id": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
-  "title": "Which is your favourite programming language",
-  "createdAt": "2021-10-01T17:14:21.156256+05:30",
-  "updatedAt": "2021-10-01T17:14:21.156256+05:30",
-  "createdBy": "",
-  "updatedBy": "",
-  "deletedBy": ""
-}
+  "status": {
+    "code": 200,
+    "message": "Successfully fetched by Id",
+    "type": "success"
+  },
+  "data": {
+    "id": "f65ee8d5-57e8-4c6c-9ade-c65bad04b383",
+    "title": "Which is your favourite programming language",
+    "createdAt": "2021-10-01T17:14:21.156256+05:30",
+    "updatedAt": "2021-10-01T17:14:21.156256+05:30",
+    "createdBy": "",
+    "updatedBy": "",
+    "deletedBy": ""
+  }
 }
 ```
 
@@ -508,10 +508,8 @@ You should receive the following response
 To retrieve all the polls, use the `POST` endpoint `/api/polls/search` with the following request body
 ```json
 {
-  "pagination": {
-    "page": 1,
-    "limit": 10
-  }
+    "page": 0,
+    "paegSize": 10
 }
 ```
 You should receive the following response
