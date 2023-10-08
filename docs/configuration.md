@@ -17,6 +17,9 @@ Baileys employs predefined keys, enabling effortless server setup for various op
   - `port`: Specifies the port on which the server will run.
   - `base_api_path`: Defines the base path for all API endpoints.
 
+## Type ConfigurationKey
+Baileys exports a Go `type` called `ConfigurationKey`, which is an alias for the string type. This type is used to define keys for configuration values. To use the helper configuration methods offered by Baileys, it's necessary to declare all configuration keys as constants of the `ConfigurationKey` type.
+
 ## Helper functions which can be used for development
 The configuration package offers a set of handy methods for retrieving configuration values. Here are more details on these functions:
 1. `GetConfiguration` - Returns the pointer to `viper` configuration object.
@@ -24,4 +27,3 @@ The configuration package offers a set of handy methods for retrieving configura
 3. `GetIntConfig` - Returns the int value for the key provided key.
 4. `GetBoolConfig` - Returns the bool value for the key provided key.
 5. `GetConfig` - Returns an interface{} value for the supplied key, which can be type-asserted to the user-defined type as needed.
-
