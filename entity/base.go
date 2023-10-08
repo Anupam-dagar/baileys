@@ -21,11 +21,28 @@ func (bm *BaseModel) BeforeCreate(tx *gorm.DB) (err error) {
 	bm.CreatedAt = time.Now()
 	bm.UpdatedAt = time.Now()
 
+	actor := GetEntityActor(tx)
+	bm.CreatedBy = actor
+	bm.UpdatedBy = actor
+
 	return
 }
 
 func (bm *BaseModel) BeforeUpdate(tx *gorm.DB) (err error) {
 	bm.UpdatedAt = time.Now()
+	bm.UpdatedBy = GetEntityActor(tx)
 
 	return
+}
+
+func GetEntityActor(tx *gorm.DB) string {
+	ctx := tx.Statement.Context
+
+	userId := "SYSTEM"
+	value := ctx.Value("actor")
+	if value != nil {
+		userId = value.(string)
+	}
+
+	return userId
 }
