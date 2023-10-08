@@ -579,5 +579,8 @@ You should receive the following response
 }
 ```
 
+## Postman Collection
+You can find the postman collection for the polls app [here](https://github.com/Anupam-dagar/baileys-polls-app/blob/main/polls.postman_collection.json)
+
 ## Source Code
 You can find the source code for the polls app [here](https://github.com/Anupam-dagar/baileys-polls-app)
