@@ -10,3 +10,4 @@
   - [Routes](routes.md)
 - **Api Reference**
   - [Configuration](configuration.md)
+  - [Response](response.md)
