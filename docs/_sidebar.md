@@ -8,6 +8,8 @@
   - [Service](service.md)
   - [Repository](repository.md)
   - [Routes](routes.md)
+- **Search API using BQL**
+  - [Baileys Query Language (bql)](bql.md)
 - **Api Reference**
   - [Configuration](configuration.md)
   - [Response](response.md)
