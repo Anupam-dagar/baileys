@@ -14,8 +14,8 @@ The request body for the search API is a JSON object containing the following ke
 
 - `filters`: (Optional) A BQL query string for filtering entities. Refer to [Baileys Query Language (BQL)](bql.md)for
   more details on BQL.
-- `pageSize`: (Required) The maximum number of entities to return. The default is 0. Send -1 to retrieve all entities
-  disabling pagination.
+- `pageSize`: (Required) The maximum number of entities to return. Send -1 to retrieve all entities
+  disabling pagination. 0 is not a valid value.
 - `page`: (Optional) The page number of the entities to return. The default is 0 (page numbering starts from 0).
 - `sort`: (Optional) The sorting order for the entities. The format is `Column:Order`, where `Column` is the column name
   and `Order` is either `asc` or `desc`. For example, `name:asc` sorts the entities by the `name` column in ascending
