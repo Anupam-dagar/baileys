@@ -10,6 +10,7 @@
   - [Routes](routes.md)
 - **Search API using BQL**
   - [Baileys Query Language (bql)](bql.md)
+  - [Search Api Reference](search-api.md)
 - **Api Reference**
   - [Configuration](configuration.md)
   - [Response](response.md)

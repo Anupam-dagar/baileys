@@ -13,7 +13,7 @@ Following is a sample response for the baileys api
     "totalCount": 1
   },
   "data": {
-    // JSON structure of the provided struct
+    // JSON structure of the provided struct or is a list of JSON structure of the provided struct basis the type of api called.
   },
 }
 ```
