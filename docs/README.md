@@ -1,9 +1,9 @@
 # Baileys - Code Less, Deliver More.
 
+<img src="./logo.png" width="300">
+
 ## What is Baileys?
 Baileys is a powerful service framework that empowers your team to develop golang backend services with remarkable speed and efficiency, while requiring less code. Written in golang and built on top of the gin framework, Baileys offers all the capabilities and flexibility of gin, and more.
-
-[//]: # (Unlock the true potential of go backend services as Baileys enables you to deliver more with its streamlined approach. With Baileys, you can harness the strength of go's backend development to create high-performing services, all while reducing the amount of code you need to write.)
 
 Experience the smoothness of Baileys as it elevates your backend development process, enabling you to achieve blazing fast performance and exceptional results while reducing the amount of code you need to write.
 > It's time to take a shot of Baileys and unleash the power of go backend services like never before.
@@ -22,7 +22,7 @@ Experience the smoothness of Baileys as it elevates your backend development pro
 ## How to Contribute?
 Visit the [Contributing Guidelines](https://github.com/Anupam-dagar/baileys/blob/main/CONTRIBUTING.md) to learn how to contribute to Baileys.
 
-## Maintainers
+## Contributors
 | [![Anupam Dagar](https://images.weserv.nl/?url=avatars.githubusercontent.com/u/21174572?v=4&h=100&w=100&fit=cover&mask=circle "Anupam Dagar")](https://github.com/Anupam-dagar) | [![Abhinav Tripathi](https://images.weserv.nl/?url=avatars.githubusercontent.com/u/10612720?v=4&h=100&w=100&fit=cover&mask=circle "Abhinav Tripathi")](https://github.com/ironman19933) |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Anupam Dagar](https://github.com/Anupam-dagar)                                                                                                                                 | [Abhinav Tripathi](https://github.com/ironman19933)                                                                                                                                     |

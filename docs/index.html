@@ -29,12 +29,14 @@
         crossChapterText: true,
       },
       routerMode: 'history',
+      coverpage: true,
       plugins: [
         function pageFooter(hook, vm) {
+        let currentYear = new Date().getFullYear();
           var footer = [
             '<hr/>',
             '<footer>',
-            '<span>&copy;2023 <a href="https://github.com/Anupam-dagar/baileys">Baileys</a>: Simplicity meets scalable excellence!</span>',
+            `<span>&copy;${currentYear} <a href="https://github.com/Anupam-dagar/baileys">Baileys</a>: Simplicity meets scalable excellence!</span>`,
             '</footer>',
           ].join('');
 
