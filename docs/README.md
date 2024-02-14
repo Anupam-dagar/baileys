@@ -1,6 +1,6 @@
 # Baileys - Code Less, Deliver More.
 
-<img src="./logo.png" width="300">
+<img src="./logo.png" width="300"><br>
 
 ## What is Baileys?
 Baileys is a powerful service framework that empowers your team to develop golang backend services with remarkable speed and efficiency, while requiring less code. Written in golang and built on top of the gin framework, Baileys offers all the capabilities and flexibility of gin, and more.
@@ -26,3 +26,9 @@ Visit the [Contributing Guidelines](https://github.com/Anupam-dagar/baileys/blob
 | [![Anupam Dagar](https://images.weserv.nl/?url=avatars.githubusercontent.com/u/21174572?v=4&h=100&w=100&fit=cover&mask=circle "Anupam Dagar")](https://github.com/Anupam-dagar) | [![Abhinav Tripathi](https://images.weserv.nl/?url=avatars.githubusercontent.com/u/10612720?v=4&h=100&w=100&fit=cover&mask=circle "Abhinav Tripathi")](https://github.com/ironman19933) |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [Anupam Dagar](https://github.com/Anupam-dagar)                                                                                                                                 | [Abhinav Tripathi](https://github.com/ironman19933)                                                                                                                                     |
+
+## License
+[BSD 2-Clause License](https://github.com/Anupam-dagar/baileys/blob/main/LICENSE)
+
+## Attribution
+Gopher logo generated using [GopherKon](https://www.quasilyte.dev/gopherkon/)

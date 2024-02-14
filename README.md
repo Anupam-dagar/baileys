@@ -35,3 +35,6 @@ Baileys is inspired from [Service Framework for Java](https://github.com/dongive
 
 ## License
 [BSD 2-Clause License](LICENSE)
+
+## Attribution
+Gopher logo generated using [GopherKon](https://www.quasilyte.dev/gopherkon/)
