@@ -20,7 +20,7 @@ Experience the smoothness of Baileys as it elevates your backend development pro
 5. **Multi-Environment Configuration:** Baileys offers a flexible configuration setup through YAML files. Easily define and switch between different environments, ensuring smooth and reliable execution across various deployment scenarios.
 
 ## Documentation
-Complete documentation can be found [here](https://baileys.anupamdagar.com).
+Complete documentation can be found [here](https://gobaileys.app).
 
 ## How to Contribute?
 Visit the [Contributing Guidelines](https://github.com/Anupam-dagar/baileys/blob/main/CONTRIBUTING.md) to learn how to contribute to Baileys.
